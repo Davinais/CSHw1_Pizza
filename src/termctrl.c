@@ -2,7 +2,7 @@
 
 static struct termios ori_term, sys_term;
 
-void startsystem()
+void startrtsystem(void)
 {
     tcgetattr(0, &ori_term); //取得原設定並儲存
     setvbuf(stdout, NULL, _IONBF, 0); //取消緩衝區
@@ -14,9 +14,29 @@ void startsystem()
     tcsetattr(0, TCSANOW, &sys_term);
 }
 
-void stopsystem()
+void stoprtsystem(void)
 {
     tcsetattr(0, TCSANOW, &ori_term);
     setvbuf(stdout, NULL, _IOLBF, BUFSIZ);
 }
 
+void gotorc(int row, int col)
+{
+    printf("\e[%d;%dH", row, col);
+}
+
+void clearscr(void)
+{
+    printf("\e[2J");
+}
+
+void printcolor(char *str, Color color)
+{
+    int colornum = 8;
+    int lightcode = color/colornum;
+    int colorcode = color%colornum;
+    if(lightcode > 1)
+        printf("%s", str);
+    else
+        printf("\e[%d;3%dm%s\e[m", lightcode, colorcode, str);
+}

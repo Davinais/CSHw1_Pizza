@@ -5,5 +5,15 @@
 #include <stdio.h>
 #include <termios.h>
 
-void startsystem(void);
-void stopsystem(void);
+typedef enum Color
+{
+    BLACK, DARK_RED, DARK_GREEN, DARK_YELLOW, DARK_BLUE, DARK_MAGENTA, DARK_CYAN, GRAY,
+    DARK_GRAY, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE,
+    NONE
+}Color;
+
+void startrtsystem(void);
+void stoprtsystem(void);
+void gotorc(int, int);
+void clearscr(void);
+void printcolor(char*, Color);
