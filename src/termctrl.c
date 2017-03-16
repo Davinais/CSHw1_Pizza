@@ -40,3 +40,34 @@ void printcolor(char *str, Color color)
     else
         printf("\e[%d;3%dm%s\e[m", lightcode, colorcode, str);
 }
+
+void drawbox(int startrow, int startcol, int endrow, int endcol)
+{
+    int rowcount = endrow - startrow + 1, colcount = endcol - startcol + 1;
+    if(rowcount < 2 || colcount < 2)
+        return;
+    printf("\e[s");
+    gotorc(startrow, startcol);
+    printf("╭");
+    int i = 0;
+    for(i = 0; i < colcount-2; i++)
+        printf("─");
+    printf("╮");
+    printf("\e[D\e[B");
+    for(i = 0; i < rowcount-2; i++)
+    {
+        printf("│");
+        printf("\e[D\e[B");
+    }
+    printf("╯");
+    gotorc(startrow+1, startcol);
+    for(i = 0; i < rowcount-2; i++)
+    {
+        printf("│");
+        printf("\e[D\e[B");
+    }
+    printf("╰");
+    for(i = 0; i < colcount-2; i++)
+        printf("─");
+    printf("\e[r");
+}
