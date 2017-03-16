@@ -41,6 +41,31 @@ void printcolor(char *str, Color color)
         printf("\e[%d;3%dm%s\e[m", lightcode, colorcode, str);
 }
 
+void drawvline(int startcol, int startrow, int length)
+{
+    printf("\e[s");
+    gotorc(startrow, startcol);
+    int i = 0;
+    for(i = 0; i < length; i++)
+    {
+        printf("│");
+        printf("\e[D\e[B");
+    }
+    printf("\e[r");
+}
+
+void drawhline(int startrow, int startcol, int length)
+{
+    printf("\e[s");
+    gotorc(startrow, startcol);
+    int i = 0;
+    for(i = 0; i < length; i++)
+    {
+        printf("─");
+    }
+    printf("\e[r");
+}
+
 void drawbox(int startrow, int startcol, int endrow, int endcol)
 {
     int rowcount = endrow - startrow + 1, colcount = endcol - startcol + 1;
@@ -48,25 +73,25 @@ void drawbox(int startrow, int startcol, int endrow, int endcol)
         return;
     printf("\e[s");
     gotorc(startrow, startcol);
-    printf("╭");
+    printf("┌");
     int i = 0;
     for(i = 0; i < colcount-2; i++)
         printf("─");
-    printf("╮");
+    printf("┐");
     printf("\e[D\e[B");
     for(i = 0; i < rowcount-2; i++)
     {
         printf("│");
         printf("\e[D\e[B");
     }
-    printf("╯");
+    printf("┘");
     gotorc(startrow+1, startcol);
     for(i = 0; i < rowcount-2; i++)
     {
         printf("│");
         printf("\e[D\e[B");
     }
-    printf("╰");
+    printf("└");
     for(i = 0; i < colcount-2; i++)
         printf("─");
     printf("\e[r");
