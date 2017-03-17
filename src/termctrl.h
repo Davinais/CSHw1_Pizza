@@ -1,3 +1,5 @@
+#ifndef _TERMCTRL_H_
+#define _TERMCTRL_H_
 /*
 參考自"https://www.cyut.edu.tw/~ckhung/b/mi/textmode.php"之內容
 並做些微改動，以符合需求
@@ -20,3 +22,4 @@ void printcolor(char*, Color);
 void drawvline(int, int, int);
 void drawhline(int, int, int);
 void drawbox(int , int, int, int);
+#endif
