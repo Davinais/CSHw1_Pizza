@@ -41,6 +41,12 @@ void printcolor(char *str, Color color)
         printf("\e[%d;3%dm%s\e[m", lightcode, colorcode, str);
 }
 
+void flush_in(void)
+{
+    char c;
+    while((c = getchar()) != '\n' && c != EOF);
+}
+
 void drawvline(int startcol, int startrow, int length)
 {
     printf("\e[s");
