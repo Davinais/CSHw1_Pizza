@@ -78,12 +78,12 @@ void drawbox(int startrow, int startcol, int endrow, int endcol)
     for(i = 0; i < colcount-2; i++)
         printf("─");
     printf("┐");
-    printf("\e[D\e[B");
-    for(i = 0; i < rowcount-2; i++)
+    for(i = 1; i <= rowcount-2; i++)
     {
+        gotorc(startrow+i, endcol);
         printf("│");
-        printf("\e[D\e[B");
     }
+    gotorc(endrow, endcol);
     printf("┘");
     gotorc(startrow+1, startcol);
     for(i = 0; i < rowcount-2; i++)
