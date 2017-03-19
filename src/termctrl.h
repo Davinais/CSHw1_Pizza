@@ -19,7 +19,7 @@ void stoprtsystem(void);
 void gotorc(int, int);
 void clearscr(void);
 void printcolor(char*, Color);
-void flush_in(void);
+int flush_in(void);
 void drawvline(int, int, int);
 void drawhline(int, int, int);
 void drawbox(int , int, int, int);
