@@ -325,14 +325,14 @@ int main(void)
     }
     //顯示總計
     gotorc(totalpriceline, pricecolstart);
-    {
-        char temp[20], temp2[40];
-        sprintf(temp, "%d元", totalprice);
-        printf("%s", strright(temp2, temp, strlen(temp)-strlen("元")+2, pricewidth));
-    }
+    char sumtext[20], sumtemp[40];
+    sprintf(sumtext, "%d元", totalprice);
+    printcolor(strright(sumtemp, sumtext, strlen(sumtext)-strlen("元")+2, pricewidth), YELLOW);
     gotorc(cmdline, 1);
     printf("\e[2K"); //清除該行
-    printf("總計金額為：%d元，感謝使用本點餐系統！", totalprice);
+    printf("總計金額為：");
+    printcolor(sumtext, YELLOW);
+    printf("，感謝使用本點餐系統！");
     //clearscr();
     gotorc(24, 1);
     return 0;
