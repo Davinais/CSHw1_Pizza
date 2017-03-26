@@ -322,6 +322,7 @@ int main(void)
         }
     }while(pizzaordermore);
     //判斷限時優惠
+    double sum = totalprice;
     if(totalprice > 1000)
     {
         char temp[80], temp2[20];
@@ -329,9 +330,9 @@ int main(void)
         gotorc(discountline, ordernamestart);
         printf("%s", strright(temp, "千元以上限時９折優惠", 20, ordernamewidth));
         gotorc(discountline, pricecolstart);
-        int discount = totalprice*0.1;
-        totalprice -= discount;
-        sprintf(temp2, "%d元", discount*(-1));
+        double discount = sum*0.1;
+        sum *= 0.9;
+        sprintf(temp2, "%.1f元", discount*(-1));
         printf("%s", strright(temp, temp2, strlen(temp2)-strlen("元")+2, pricewidth));
     }
     //外送運費計算
@@ -342,15 +343,15 @@ int main(void)
         gotorc(deliverline, ordernamestart);
         printf("%s", strright(temp, "外送10％運費", 12, ordernamewidth));
         gotorc(deliverline, pricecolstart);
-        int deliver = totalprice*0.1;
-        totalprice += deliver;
-        sprintf(temp2, "%d元", deliver);
+        double deliver = sum*0.1;
+        sum *= 1.1;
+        sprintf(temp2, "%.1f元", deliver);
         printf("%s", strright(temp, temp2, strlen(temp2)-strlen("元")+2, pricewidth));
     }
     //顯示總計
     gotorc(totalpriceline, pricecolstart);
     char sumtext[20], sumtemp[40];
-    sprintf(sumtext, "%d元", totalprice);
+    sprintf(sumtext, "%d元", (int)sum);
     printcolor(strright(sumtemp, sumtext, strlen(sumtext)-strlen("元")+2, pricewidth), YELLOW);
     gotorc(cmdline, 1);
     printf("\e[2K"); //清除該行
